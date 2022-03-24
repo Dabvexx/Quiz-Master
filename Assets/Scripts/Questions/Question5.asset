@@ -18,4 +18,4 @@ MonoBehaviour:
   - Start()
   - OnTriggerEnter2D()
   - Update()
-  correctAnswerIndex: 0
+  correctAnswerIndex: 3
