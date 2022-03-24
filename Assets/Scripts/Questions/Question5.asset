@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Question5
   m_EditorClassIdentifier: 
   question: In Unity, What function is called every frame?
+  answers:
+  - OnDestroy()
+  - Start()
+  - OnTriggerEnter2D()
+  - Update()
+  correctAnswerIndex: 0

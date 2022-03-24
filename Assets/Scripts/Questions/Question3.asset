@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Question3
   m_EditorClassIdentifier: 
   question: What would this function return? private void DoSomething() { }
+  answers:
+  - Int
+  - String
+  - Nothing
+  - Bool
+  correctAnswerIndex: 2

@@ -15,3 +15,9 @@ MonoBehaviour:
   question: In C#, what keyword defines that a function / method that can be used
     in the script it was declared in, as well as other scripts that inherit from
     that script?
+  answers:
+  - Protected
+  - Private
+  - Public
+  - Static
+  correctAnswerIndex: 0

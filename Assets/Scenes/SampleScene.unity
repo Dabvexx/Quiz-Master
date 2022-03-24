@@ -201,7 +201,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &8989046
 RectTransform:
@@ -243,7 +243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &62139437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 116570949}
   - component: {fileID: 116570948}
   - component: {fileID: 116570947}
+  - component: {fileID: 116570951}
   m_Layer: 5
   m_Name: Quiz Canvas
   m_TagString: Untagged
@@ -428,6 +429,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &116570951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116570946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d046e209968fca408a3a9568e6ee800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionText: {fileID: 1991455477}
+  question: {fileID: 11400000, guid: c25bf7b6b48a93f44af4fa8317e0621b, type: 2}
+  answerbuttons:
+  - {fileID: 1054031805}
+  - {fileID: 380602209}
+  - {fileID: 318953202}
+  - {fileID: 1673701505}
 --- !u!1 &173300696
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5529412}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -504,6 +524,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173300696}
   m_CullTransparentMesh: 1
+--- !u!1 &318953202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+  m_PrefabInstance: {fileID: 792518678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &380602209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+  m_PrefabInstance: {fileID: 1786077499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,6 +628,10 @@ PrefabInstance:
     - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Name
       value: Answer3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+      propertyPath: m_TagString
+      value: Answer
       objectReference: {fileID: 0}
     - target: {fileID: 2969720173543333942, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Pivot.x
@@ -700,6 +734,10 @@ PrefabInstance:
     - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Name
       value: Answer4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+      propertyPath: m_TagString
+      value: Answer
       objectReference: {fileID: 0}
     - target: {fileID: 2969720173543333942, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Pivot.x
@@ -859,6 +897,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1054031805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+  m_PrefabInstance: {fileID: 111048923700969286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1244443564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1045,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1673701505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+  m_PrefabInstance: {fileID: 812720014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1786077499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1012,6 +1060,10 @@ PrefabInstance:
     - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Name
       value: Answer2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+      propertyPath: m_TagString
+      value: Answer
       objectReference: {fileID: 0}
     - target: {fileID: 2969720173543333942, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Pivot.x
@@ -1386,6 +1438,10 @@ PrefabInstance:
     - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Name
       value: Answer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842011644881024984, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
+      propertyPath: m_TagString
+      value: Answer
       objectReference: {fileID: 0}
     - target: {fileID: 2969720173543333942, guid: 6fe8e57ec9c0adb44a689b28bda73e7c, type: 3}
       propertyPath: m_Pivot.x

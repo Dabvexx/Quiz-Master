@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Question4
   m_EditorClassIdentifier: 
   question: What is the notation to make a comment in C#?
+  answers:
+  - '#'
+  - //
+  - '*'
+  - '%'
+  correctAnswerIndex: 1
