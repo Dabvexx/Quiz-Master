@@ -26,6 +26,11 @@ public class Quiz : MonoBehaviour
     [Header("Timer")]
     [SerializeField] Image timerImage;
     [SerializeField] Timer timer;
+
+    [Header("Scoring")]
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] ScoreKeeper scoreKeeper;
+
     #endregion
 
     #region Unity Methods
@@ -35,6 +40,7 @@ public class Quiz : MonoBehaviour
         answerbuttons = GameObject.FindGameObjectsWithTag("Answer");
         GetNextQuestion();
         timer = FindObjectOfType<Timer>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     private void Update()
@@ -74,6 +80,7 @@ public class Quiz : MonoBehaviour
             questionText.text = "So True!";
             Image buttonImage = answerbuttons[index].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
+            scoreKeeper.IncrementCorrectAnswers();
         }
         else
         {
@@ -93,6 +100,7 @@ public class Quiz : MonoBehaviour
             SetDefaultButtonSprites();
             GetRandomQuestion();
             DisplayQuestion();
+            scoreKeeper.IncrementQuestionsSeen();
         }
     }
 
@@ -133,6 +141,7 @@ public class Quiz : MonoBehaviour
 
         SetButtonState(false);
         timer.CancelTimer();
+        scoreText.text = "Score: " + scoreKeeper.CalculateScore() + "%";
     }
     #endregion Methods
 
