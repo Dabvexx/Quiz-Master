@@ -9,12 +9,24 @@ public class Quiz : MonoBehaviour
 {
     #region Variables
     // Variables.
+    [Header("Question")]
     [SerializeField] TextMeshProUGUI questionText;
     [SerializeField] QuestionSO question;
+    //[SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    //QuestionSO currentQuestion;
+
+    [Header("Answer")]
     [SerializeField] GameObject[] answerbuttons;
     int correctAnswerIndex;
+    bool hasAnsweredEarly;
+
+    [Header("Button Colors")]
     [SerializeField] Sprite correctAnswerSprite;
     [SerializeField] Sprite defaultAnswerSprite;
+
+    [Header("Timer")]
+    [SerializeField] Image timerImage;
+    [SerializeField] Timer timer;
     #endregion
 
     #region Unity Methods
@@ -23,7 +35,26 @@ public class Quiz : MonoBehaviour
     {
         answerbuttons = GameObject.FindGameObjectsWithTag("Answer");
 
-        DisplayQuestion();
+        GetNextQuestion();
+        //DisplayQuestion();
+    }
+
+    private void Update()
+    {
+        timerImage = GameObject.FindGameObjectWithTag("Timer").GetComponent<Image>();
+        timerImage.fillAmount = timer.fillFraction;
+
+        if(timer.loadNextQuestion)
+        {
+            hasAnsweredEarly = false;
+            GetNextQuestion();
+            timer.loadNextQuestion = false;
+        }
+        else if (!hasAnsweredEarly && !timer.isAnsweringQuestion)
+        {
+            DisplayAnswer(-1);
+            SetButtonState(false);
+        }
     }
     #endregion
 
@@ -38,8 +69,7 @@ public class Quiz : MonoBehaviour
             buttonText.text = question.GetAnswer(i);
         }
     }
-
-    public void OnAnswerSelected(int index)
+    void DisplayAnswer(int index)
     {
         if (index == question.GetCorrectAnswerIndex())
         {
@@ -55,8 +85,13 @@ public class Quiz : MonoBehaviour
             Image buttonImage = answerbuttons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
         }
+    }
 
-        SetButtonState(false);
+    void GetNextQuestion()
+    {
+        SetButtonState(true);
+        SetDefaultButtonSprites();
+        DisplayQuestion();
     }
 
     void SetButtonState(bool state)
@@ -68,14 +103,6 @@ public class Quiz : MonoBehaviour
             button.interactable = state;
         }
     }
-
-    void GetNextQuestion()
-    {
-        SetButtonState(true);
-        SetDefaultButtonSprites();
-        DisplayQuestion();
-    }
-
     void SetDefaultButtonSprites()
     {
         for (int i = 0; i < answerbuttons.Length; i++)
@@ -83,6 +110,15 @@ public class Quiz : MonoBehaviour
             Image buttonImage = answerbuttons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = defaultAnswerSprite;
         }
+    }
+
+    public void OnAnswerSelected(int index)
+    {
+        hasAnsweredEarly = true;
+        DisplayAnswer(index);
+
+        SetButtonState(false);
+        timer.CancelTimer();
     }
     #endregion Methods
 
