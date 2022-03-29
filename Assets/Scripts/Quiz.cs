@@ -15,7 +15,7 @@ public class Quiz : MonoBehaviour
     QuestionSO currentQuestion;
 
     [Header("Answer")]
-    [SerializeField] GameObject[] answerbuttons;
+    [SerializeField] GameObject[] answerButtons;
     int correctAnswerIndex;
     bool hasAnsweredEarly;
 
@@ -31,16 +31,21 @@ public class Quiz : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] ScoreKeeper scoreKeeper;
 
+    [Header("ProgressBar")]
+    [SerializeField] Slider progressBar;
+    public bool isComplete;
+
     #endregion
 
     #region Unity Methods
 
-    void Start()
+    void Awake()
     {
-        answerbuttons = GameObject.FindGameObjectsWithTag("Answer");
-        GetNextQuestion();
+        answerButtons = GameObject.FindGameObjectsWithTag("Answer");
         timer = FindObjectOfType<Timer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        progressBar.maxValue = questions.Count;
+        progressBar.value = 0;
     }
 
     private void Update()
@@ -50,6 +55,12 @@ public class Quiz : MonoBehaviour
 
         if(timer.loadNextQuestion)
         {
+            if (progressBar.value == progressBar.maxValue)
+            {
+                isComplete = true;
+                return;
+            }
+
             hasAnsweredEarly = false;
             GetNextQuestion();
             timer.loadNextQuestion = false;
@@ -67,9 +78,9 @@ public class Quiz : MonoBehaviour
     {
         questionText.text = currentQuestion.GetQuestion();
 
-        for (int i = 0; i < answerbuttons.Length; i++)
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            TextMeshProUGUI buttonText = answerbuttons[i].GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = currentQuestion.GetAnswer(i);
         }
     }
@@ -78,7 +89,7 @@ public class Quiz : MonoBehaviour
         if (index == currentQuestion.GetCorrectAnswerIndex())
         {
             questionText.text = "So True!";
-            Image buttonImage = answerbuttons[index].GetComponent<Image>();
+            Image buttonImage = answerButtons[index].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
             scoreKeeper.IncrementCorrectAnswers();
         }
@@ -87,7 +98,7 @@ public class Quiz : MonoBehaviour
             correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
             string correctAnswer = currentQuestion.GetAnswer(correctAnswerIndex);
             questionText.text = "YOU WACK, ANSWER WAS \n" + correctAnswer;
-            Image buttonImage = answerbuttons[correctAnswerIndex].GetComponent<Image>();
+            Image buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
         }
     }
@@ -100,6 +111,7 @@ public class Quiz : MonoBehaviour
             SetDefaultButtonSprites();
             GetRandomQuestion();
             DisplayQuestion();
+            progressBar.value++;
             scoreKeeper.IncrementQuestionsSeen();
         }
     }
@@ -118,18 +130,18 @@ public class Quiz : MonoBehaviour
 
     void SetButtonState(bool state)
     {
-        for (int i = 0; i < answerbuttons.Length; i++)
+        for (int i = 0; i < answerButtons.Length; i++)
         {
             // Why are we not just storing these components in an array / list / dictionary / whatever?
-            Button button = answerbuttons[i].GetComponent<Button>();
+            Button button = answerButtons[i].GetComponent<Button>();
             button.interactable = state;
         }
     }
     void SetDefaultButtonSprites()
     {
-        for (int i = 0; i < answerbuttons.Length; i++)
+        for (int i = 0; i < answerButtons.Length; i++)
         {
-            Image buttonImage = answerbuttons[correctAnswerIndex].GetComponent<Image>();
+            Image buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = defaultAnswerSprite;
         }
     }
@@ -142,6 +154,11 @@ public class Quiz : MonoBehaviour
         SetButtonState(false);
         timer.CancelTimer();
         scoreText.text = "Score: " + scoreKeeper.CalculateScore() + "%";
+
+        if (progressBar.value == progressBar.maxValue)
+        {
+            isComplete = true;
+        }
     }
     #endregion Methods
 
