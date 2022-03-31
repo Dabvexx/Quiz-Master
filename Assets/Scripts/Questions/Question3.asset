@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b536811acc8fde4097b0749696392b4, type: 3}
   m_Name: Question3
   m_EditorClassIdentifier: 
-  question: What would this function return? private void DoSomething() { }
+  question: What would this function return? \n private void DoSomething() { }
   answers:
   - Int
   - String
